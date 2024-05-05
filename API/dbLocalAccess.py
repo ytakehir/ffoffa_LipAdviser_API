@@ -23,7 +23,7 @@ app = Blueprint('db', __name__)
 class DBLocalAccess:
     @app.route("/dbLocalAccess",  methods=["POST"])
     @validate()
-    def colorCodeSerach(body: DBLocalAccessInput):
+    def colorCodeSearch(body: DBLocalAccessInput):
         """DBアクセスAPI
 
         ブランド名とカラーコードから同じブランドの似た色のリップを検索する
