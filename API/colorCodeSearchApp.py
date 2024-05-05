@@ -13,9 +13,47 @@ from Utils import settings as set
 app = Blueprint('lipAdviser', __name__)
 
 class LipSearch:
-    @app.route("/search/brand",  methods=["POST"])
+    @app.route("/search/brandName",  methods=["GET"])
     @validate()
-    def searchBrand(body: inputBean.BrandNameSearchInput):
+    def searchBrandName():
+        """ブランド名一覧取得API
+
+        ブランド名を重複なしで取得する
+
+        Args:
+            brandName (str): ブランド名
+
+        Returns:
+            json: 取得結果
+        """
+
+        try:
+            brandNameInfo = []
+
+            dao = Dao()
+            result = dao.brandNameSelect()
+
+            for re in result:
+                brandNameInfo.append(responseBean.BrandNameInfo(
+                                brandName = re.get('BRAND_NAME'),
+                            ))
+
+            response = responseBean.BrandNameInfoList(
+                brandNameList = brandNameInfo
+            ).model_dump_json()
+
+        except Exception as e:
+            current_app.logger.error(F'エラー詳細：{e}')
+            response = responseBean.ErrorInfo(
+                errorId = set.MESID_SYSTEM_ERROR,
+                errorMessage = ["ブランド名一覧取得API"]
+            )
+
+        return response
+
+    @app.route("/search/brandsLip",  methods=["POST"])
+    @validate()
+    def searchBrandsLip(body: inputBean.BrandNameSearchInput):
         """同ブランドリップ一覧検索API
 
         ブランド名から同じブランドのリップを検索する
@@ -30,19 +68,8 @@ class LipSearch:
         try:
             lipColorInfo = []
 
-            url = 'https://spot-search.tokyo/python/lipAdviser/dbLocalAccess'
-
-            data = {
-                "sqlIndex": "1",
-                "sqlParam1": body.brandName,
-                "sqlParam2": "",
-                "sqlParam3": "",
-                "sqlParam4": "",
-                "sqlParam5": "",
-                "sqlParam6": ""
-            }
-
-            result = requests.post(url, json = data).json()
+            dao = Dao()
+            result = dao.brandsLipSelect(body.brandName)
 
             for re in result:
                 lipColorInfo.append(responseBean.LipColorInfo(

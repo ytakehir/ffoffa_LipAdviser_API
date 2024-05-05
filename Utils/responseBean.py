@@ -28,6 +28,12 @@ class BaseLipInfo(BaseModel):
     salesStopFlag: str
     cosmeURL: str
 
+class BrandNameInfo(BaseModel):
+    brandName: str
+
+class BrandNameInfoList(BaseModel):
+    brandNameList: list[BrandNameInfo]
+
 class SimilarLipInfo(BaseModel):
     similarPoint: str
     lipInfo: BaseLipInfo

@@ -25,6 +25,50 @@ class DBAccess:
 
 
 class Dao:
+    def brandNameSelect(self):
+        """SELECT
+        Returns:
+            Obj: DB接続情報
+        """
+
+        try:
+            conn = DBAccess.dbAccess()
+            cur = conn.cursor()
+
+            # 結果を取得
+            cur.execute(sql.SELECT_DISTINCT_BRAND_NAME)
+            result = cur.fetchall()
+        except Exception as e:
+            # 結果を取得
+            result = {"Error": e}
+        finally:
+            cur.close()
+            conn.close()
+
+        return result
+
+    def brandsLipSelect(self, brandName):
+        """SELECT
+        Returns:
+            Obj: DB接続情報
+        """
+
+        try:
+            conn = DBAccess.dbAccess()
+            cur = conn.cursor()
+
+            # 結果を取得
+            cur.execute(sql.SELECT_WHERE_BRAND_NAME, {"brandName": brandName})
+            result = cur.fetchall()
+        except Exception as e:
+            # 結果を取得
+            result = {"Error": e}
+        finally:
+            cur.close()
+            conn.close()
+
+        return result
+
     def similarSelect(self, similarValue, similarSaturation):
         """SELECT
         Returns:
