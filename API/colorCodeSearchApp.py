@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify
 from pydantic import ValidationError
 from flask_pydantic import validate
 from flask import current_app
+from flask_cors import cross_origin
 import requests
 import sys
 sys.path.append('C:/Users/takeg/work/ffoffa_LipAdviser_API/')
@@ -14,6 +15,7 @@ app = Blueprint('lipAdviser', __name__)
 
 class LipSearch:
     @app.route("/search/brandName",  methods=["GET"])
+    @cross_origin(supports_credentials=True)
     @validate()
     def searchBrandName():
         """ブランド名一覧取得API
@@ -52,6 +54,7 @@ class LipSearch:
         return response
 
     @app.route("/search/brandsLip",  methods=["POST"])
+    @cross_origin(supports_credentials=True)
     @validate()
     def searchBrandsLip(body: inputBean.BrandNameSearchInput):
         """同ブランドリップ一覧検索API
@@ -95,6 +98,7 @@ class LipSearch:
         return response
 
     @app.route("/search/lipId",  methods=["POST"])
+    @cross_origin(supports_credentials=True)
     @validate()
     def searchLipId(body: inputBean.RipIdSearchInput):
         """リップIDリップ検索API
@@ -146,6 +150,7 @@ class LipSearch:
         return response
 
     @app.route("/search/similarColor",  methods=["POST"])
+    @cross_origin(supports_credentials=True)
     @validate()
     def searchSimilarColor(body: inputBean.ColorCodeSearchInput):
         """類似色リップ検索API
