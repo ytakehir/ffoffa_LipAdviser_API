@@ -7,5 +7,5 @@ class ColorCodeSearchInput(BaseModel):
 class BrandNameSearchInput(BaseModel):
     brandName: str
 
-class RipIdSearchInput(BaseModel):
-    ripId: str
+class LipIdSearchInput(BaseModel):
+    lipId: str

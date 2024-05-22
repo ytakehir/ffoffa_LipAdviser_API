@@ -7,7 +7,7 @@ class ErrorInfo(BaseModel):
     errorMessage: Optional[list[str]]
 
 class LipColorInfo(BaseModel):
-    ripId: int
+    lipId: int
     colorCode: str
     productName: str
     colorNumber: str
@@ -17,7 +17,7 @@ class LipColorInfoList(BaseModel):
     lipColorInfoList: list[LipColorInfo]
 
 class BaseLipInfo(BaseModel):
-    ripId: int
+    lipId: int
     brandName: str
     productName: str
     colorNumber: str
@@ -35,7 +35,7 @@ class BrandNameInfoList(BaseModel):
     brandNameList: list[BrandNameInfo]
 
 class SimilarLipInfo(BaseModel):
-    similarPoint: str
+    similarPoint: int | float
     lipInfo: BaseLipInfo
 
 class SearchInfo(BaseModel):

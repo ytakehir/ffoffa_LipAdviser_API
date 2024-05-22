@@ -195,7 +195,10 @@ class ColorService:
     def howPoint(self, distance):
         #10.0点満点
         point = (set.MAX_SIMILAR_POINT - distance)
-        return (F'{point:.1f}点')
+        if isinstance(point, float) and point.is_integer():
+            point = int(point)
+
+        return (round(point, 1))
 
     def checkDistanceLab(self, baseColor, checkColorList):
         similarDict = {}

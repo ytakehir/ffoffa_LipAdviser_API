@@ -76,7 +76,7 @@ class LipSearch:
 
             for re in result:
                 lipColorInfo.append(responseBean.LipColorInfo(
-                                ripId = re.get('RIP_ID'),
+                                lipId = re.get('LIP_ID'),
                                 colorCode = re.get('COLORCODE'),
                                 brandName = re.get('BRAND_NAME'),
                                 productName = re.get('PRODUCT_NAME'),
@@ -100,7 +100,7 @@ class LipSearch:
     @app.route("/search/lipId",  methods=["POST"])
     @cross_origin(supports_credentials=True)
     @validate()
-    def searchLipId(body: inputBean.RipIdSearchInput):
+    def searchLipId(body: inputBean.LipIdSearchInput):
         """リップIDリップ検索API
 
         リップIDからリップを検索する
@@ -117,7 +117,7 @@ class LipSearch:
 
             data = {
                 "sqlIndex": "2",
-                "sqlParam1": body.ripId,
+                "sqlParam1": body.lipId,
                 "sqlParam2": "",
                 "sqlParam3": "",
                 "sqlParam4": "",
@@ -128,7 +128,7 @@ class LipSearch:
             result = requests.post(url, json = data).json()
 
             response = responseBean.BaseLipInfo(
-                                ripId = result.get('RIP_ID'),
+                                lipId = result.get('LIP_ID'),
                                 brandName = result.get('BRAND_NAME'),
                                 productName = result.get('PRODUCT_NAME'),
                                 colorNumber = result.get('COLOR_NUMBER'),
@@ -183,7 +183,7 @@ class LipSearch:
                     lipInfo.append(responseBean.SimilarLipInfo(
                                     similarPoint = similarDict[re.get('COLORCODE')],
                                     lipInfo = responseBean.BaseLipInfo(
-                                        ripId = re.get('RIP_ID'),
+                                        lipId = re.get('LIP_ID'),
                                         brandName = re.get('BRAND_NAME'),
                                         productName = re.get('PRODUCT_NAME'),
                                         colorNumber = re.get('COLOR_NUMBER'),
