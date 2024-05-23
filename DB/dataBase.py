@@ -47,6 +47,28 @@ class Dao:
 
         return result
 
+    def lipIdSelect(self, lipId):
+        """SELECT
+        Returns:
+            Obj: DB接続情報
+        """
+
+        try:
+            conn = DBAccess.dbAccess()
+            cur = conn.cursor()
+
+            # 結果を取得
+            cur.execute(sql.SELECT_WHERE_RIP_ID, {"lipId": lipId})
+            result = cur.fetchall()
+        except Exception as e:
+            # 結果を取得
+            result = {"Error": e}
+        finally:
+            cur.close()
+            conn.close()
+
+        return result
+
     def brandsLipSelect(self, brandName):
         """SELECT
         Returns:

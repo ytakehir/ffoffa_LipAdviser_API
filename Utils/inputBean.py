@@ -8,4 +8,4 @@ class BrandNameSearchInput(BaseModel):
     brandName: str
 
 class LipIdSearchInput(BaseModel):
-    lipId: str
+    lipId: int

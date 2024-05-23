@@ -113,32 +113,22 @@ class LipSearch:
         """
 
         try:
-            url = 'https://spot-search.tokyo/python/lipAdviser/dbLocalAccess'
+            dao = Dao()
+            result = dao.lipIdSelect(body.lipId)
 
-            data = {
-                "sqlIndex": "2",
-                "sqlParam1": body.lipId,
-                "sqlParam2": "",
-                "sqlParam3": "",
-                "sqlParam4": "",
-                "sqlParam5": "",
-                "sqlParam6": ""
-            }
-
-            result = requests.post(url, json = data).json()
-
-            response = responseBean.BaseLipInfo(
-                                lipId = result.get('LIP_ID'),
-                                brandName = result.get('BRAND_NAME'),
-                                productName = result.get('PRODUCT_NAME'),
-                                colorNumber = result.get('COLOR_NUMBER'),
-                                colorName = result.get('COLOR_NAME'),
-                                colorCode = result.get('COLORCODE'),
-                                amount = result.get('AMOUNT'),
-                                limitedProductFlag = result.get('LIMITED_PRODUCT_FLAG'),
-                                salesStopFlag = result.get('SALES_STOP_FLAG'),
-                                cosmeURL = set.COSME_URL_BASE.format(COSME_URL = result.get('COSME_URL'))
-                            ).model_dump_json()
+            for re in result:
+                    response = responseBean.BaseLipInfo(
+                                    lipId = re.get('LIP_ID'),
+                                    brandName = re.get('BRAND_NAME'),
+                                    productName = re.get('PRODUCT_NAME'),
+                                    colorNumber = re.get('COLOR_NUMBER'),
+                                    colorName = re.get('COLOR_NAME'),
+                                    colorCode = re.get('COLORCODE'),
+                                    amount = re.get('AMOUNT'),
+                                    limitedProductFlag = re.get('LIMITED_PRODUCT_FLAG'),
+                                    salesStopFlag = re.get('SALES_STOP_FLAG'),
+                                    cosmeURL = set.COSME_URL_BASE.format(COSME_URL = re.get('COSME_URL'))
+                                ).model_dump_json()
 
         except Exception as e:
             current_app.logger.error(F'エラー詳細：{e}')
