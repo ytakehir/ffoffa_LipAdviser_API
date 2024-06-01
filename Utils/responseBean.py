@@ -26,7 +26,9 @@ class BaseLipInfo(BaseModel):
     amount: int
     limitedProductFlag: str
     salesStopFlag: str
-    cosmeURL: str
+    officialURL: str
+    amazonURL: str
+    qooTenURL: str
 
 class BrandNameInfo(BaseModel):
     brandName: str
@@ -35,7 +37,7 @@ class BrandNameInfoList(BaseModel):
     brandNameList: list[BrandNameInfo]
 
 class SimilarLipInfo(BaseModel):
-    similarPoint: int | float
+    similarPoint: float
     lipInfo: BaseLipInfo
 
 class SearchInfo(BaseModel):

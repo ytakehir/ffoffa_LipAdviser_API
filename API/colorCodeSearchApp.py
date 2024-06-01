@@ -127,7 +127,9 @@ class LipSearch:
                                     amount = re.get('AMOUNT'),
                                     limitedProductFlag = re.get('LIMITED_PRODUCT_FLAG'),
                                     salesStopFlag = re.get('SALES_STOP_FLAG'),
-                                    cosmeURL = set.COSME_URL_BASE.format(COSME_URL = re.get('COSME_URL'))
+                                    officialURL = re.get('OFFICIAL_URL'),
+                                    amazonURL = re.get('AMAZON_URL'),
+                                    qooTenURL = re.get('QOO_TEN_URL')
                                 ).model_dump_json()
 
         except Exception as e:
@@ -162,7 +164,7 @@ class LipSearch:
             similarSaturation = cs.searchSimilarSaturation(body.colorCode)
 
             dao = Dao()
-            result = dao.similarSelect(similarValue, similarSaturation)
+            result = dao.similarSelect(similarValue, similarSaturation, body.lipId)
 
             checkColorList = [re.get('COLORCODE') for re in result]
             similarDict = cs.checkDistanceLab(body.colorCode, checkColorList)
@@ -182,7 +184,9 @@ class LipSearch:
                                         amount = re.get('AMOUNT'),
                                         limitedProductFlag = re.get('LIMITED_PRODUCT_FLAG'),
                                         salesStopFlag = re.get('SALES_STOP_FLAG'),
-                                        cosmeURL = set.COSME_URL_BASE.format(COSME_URL = re.get('COSME_URL'))
+                                        officialURL = re.get('OFFICIAL_URL'),
+                                        amazonURL = re.get('AMAZON_URL'),
+                                        qooTenURL = re.get('QOO_TEN_URL')
                                     )
                                 ))
 

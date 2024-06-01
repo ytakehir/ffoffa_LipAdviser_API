@@ -58,7 +58,7 @@ class Dao:
             cur = conn.cursor()
 
             # 結果を取得
-            cur.execute(sql.SELECT_WHERE_RIP_ID, {"lipId": lipId})
+            cur.execute(sql.SELECT_WHERE_LIP_ID, {"lipId": lipId})
             result = cur.fetchall()
         except Exception as e:
             # 結果を取得
@@ -91,7 +91,7 @@ class Dao:
 
         return result
 
-    def similarSelect(self, similarValue, similarSaturation):
+    def similarSelect(self, similarValue, similarSaturation, lipId):
         """SELECT
         Returns:
             Obj: DB接続情報
@@ -102,7 +102,7 @@ class Dao:
             cur = conn.cursor()
 
             # 結果を取得
-            cur.execute(sql.SELECT_WHERE_SIMILAR_COLORCODE, {"downVCode": similarValue[0], "upVCode": similarValue[1], "downSCode": similarSaturation[0], "upSCode": similarSaturation[1]})
+            cur.execute(sql.SELECT_WHERE_SIMILAR_COLORCODE, {"downVCode": similarValue[0], "upVCode": similarValue[1], "downSCode": similarSaturation[0], "upSCode": similarSaturation[1], "lipId" : lipId})
             result = cur.fetchall()
         except Exception as e:
             # 結果を取得
