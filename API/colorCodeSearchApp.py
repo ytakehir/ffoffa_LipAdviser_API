@@ -164,7 +164,7 @@ class LipSearch:
             similarSaturation = cs.searchSimilarSaturation(body.colorCode)
 
             dao = Dao()
-            result = dao.similarSelect(similarValue, similarSaturation, body.lipId)
+            result = dao.similarSelect(similarValue, similarSaturation)
 
             checkColorList = [re.get('COLORCODE') for re in result]
             similarDict = cs.checkDistanceLab(body.colorCode, checkColorList)
