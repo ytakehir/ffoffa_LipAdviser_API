@@ -35,6 +35,9 @@ class BrandNameInfo(BaseModel):
 
 class BrandNameInfoList(BaseModel):
     brandNameList: list[BrandNameInfo]
+class SimilarLipWithTagInfo(BaseModel):
+    similarPoint: float
+    lipInfo: BaseLipInfo
 
 class SimilarLipInfo(BaseModel):
     similarPoint: float
@@ -46,3 +49,18 @@ class SearchInfo(BaseModel):
 
 class SimilarLipInfoList(BaseModel):
     lipInfoList: list[SimilarLipInfo]
+
+class BaseTagInfo(BaseModel):
+    tagId: int
+    tagName: str
+    tagGenre: int
+
+class TagInfoList(BaseModel):
+    tagList: list[BaseTagInfo]
+
+class SimilarLipWithTagInfo(BaseModel):
+    lipInfo: SimilarLipInfo
+    tagList: TagInfoList
+
+class SimilarLipWithTagInfoList(BaseModel):
+    lipTagInfoList: list[SimilarLipWithTagInfo]

@@ -1,15 +1,15 @@
 from flask import Flask
 from flask_cors import CORS
 import sys
-sys.path.append('C:/Users/takeg/work/ffoffa_LipAdviser_API/')
-# sys.path.append('/home/c1343520/program/lipAdviser/')
-from API import colorCodeSearchApp, testApp, dbLocalAccess
+sys.path.append('/home/c1343520/program/lipAdviser/')
+from API import colorCodeSearchApp, tagSearchApp, testApp, dbLocalAccess
 
 # APIを読み込み
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 app.register_blueprint(testApp.app)
 app.register_blueprint(colorCodeSearchApp.app)
+app.register_blueprint(tagSearchApp.app)
 app.register_blueprint(dbLocalAccess.app)
 
 @app.after_request
