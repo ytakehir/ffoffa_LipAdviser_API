@@ -3,8 +3,7 @@ from pydantic import BaseModel, ValidationError
 from flask_pydantic import validate
 from typing import Optional
 import sys
-sys.path.append('C:\\Users\\takeg\\work\\ffoffa_LipAdviser_API\\')
-# sys.path.append('/home/c1343520/program/lipAdviser/')
+sys.path.append('/home/c8473744/program/lipAdviser/')
 from DB import dataBase
 from Utils import sql
 

@@ -4,7 +4,7 @@ from flask_pydantic import validate
 from flask import current_app
 from flask_cors import cross_origin
 import sys
-sys.path.append('/home/c1343520/program/lipAdviser/')
+sys.path.append('/home/c8473744/program/lipAdviser/')
 from DB.dataBase import Dao
 from Utils import inputBean, responseBean
 from Utils import settings as set
@@ -15,7 +15,7 @@ class TagSearch:
     @app.route("/search/tags",  methods=["GET"])
     @cross_origin(supports_credentials=True)
     @validate()
-    def searchBrandName():
+    def getBrandName():
         """タグ一覧取得API
 
         タグを重複なしで取得する

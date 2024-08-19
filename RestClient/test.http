@@ -1,7 +1,0 @@
-POST http://127.0.0.1:8000/lipAdviser/colorCodeSerach HTTP/1.1
-content-type: application/json
-
-{
-    "brandName": "KATE",
-    "colorCode": "E81045"
-}

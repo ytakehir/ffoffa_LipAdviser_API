@@ -9,3 +9,6 @@ class BrandNameSearchInput(BaseModel):
 
 class LipIdSearchInput(BaseModel):
     lipId: int
+
+class ImageSearchInput(BaseModel):
+    lipId: int

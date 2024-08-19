@@ -26,6 +26,7 @@ class BaseLipInfo(BaseModel):
     amount: int
     limitedProductFlag: str
     salesStopFlag: str
+    prFlag: str
     officialURL: str
     amazonURL: str
     qooTenURL: str
@@ -35,9 +36,6 @@ class BrandNameInfo(BaseModel):
 
 class BrandNameInfoList(BaseModel):
     brandNameList: list[BrandNameInfo]
-class SimilarLipWithTagInfo(BaseModel):
-    similarPoint: float
-    lipInfo: BaseLipInfo
 
 class SimilarLipInfo(BaseModel):
     similarPoint: float
@@ -58,9 +56,16 @@ class BaseTagInfo(BaseModel):
 class TagInfoList(BaseModel):
     tagList: list[BaseTagInfo]
 
-class SimilarLipWithTagInfo(BaseModel):
+class BaseImageInfo(BaseModel):
+    path: str
+
+class ImageInfoList(BaseModel):
+    imageList: list[BaseImageInfo]
+
+class productInfo(BaseModel):
+    imageList: ImageInfoList
     lipInfo: SimilarLipInfo
     tagList: TagInfoList
 
-class SimilarLipWithTagInfoList(BaseModel):
-    lipTagInfoList: list[SimilarLipWithTagInfo]
+class productInfoList(BaseModel):
+    productInfoList: list[productInfo]

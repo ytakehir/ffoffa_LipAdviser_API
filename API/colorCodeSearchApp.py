@@ -3,9 +3,8 @@ from pydantic import ValidationError
 from flask_pydantic import validate
 from flask import current_app
 from flask_cors import cross_origin
-import requests
 import sys
-sys.path.append('/home/c1343520/program/lipAdviser/')
+sys.path.append('/home/c8473744/program/lipAdviser/')
 from DB.dataBase import Dao
 from Utils import colorUtil, inputBean, responseBean
 from Utils import settings as set
@@ -126,6 +125,7 @@ class LipSearch:
                                     amount = re.get('AMOUNT'),
                                     limitedProductFlag = re.get('LIMITED_PRODUCT_FLAG'),
                                     salesStopFlag = re.get('SALES_STOP_FLAG'),
+                                    prFlag = re.get('PR_FLAG'),
                                     officialURL = re.get('OFFICIAL_URL'),
                                     amazonURL = re.get('AMAZON_URL'),
                                     qooTenURL = re.get('QOO_TEN_URL')
@@ -182,6 +182,7 @@ class LipSearch:
                                         amount = re.get('AMOUNT'),
                                         limitedProductFlag = re.get('LIMITED_PRODUCT_FLAG'),
                                         salesStopFlag = re.get('SALES_STOP_FLAG'),
+                                        prFlag = re.get('PR_FLAG'),
                                         officialURL = re.get('OFFICIAL_URL'),
                                         amazonURL = re.get('AMAZON_URL'),
                                         qooTenURL = re.get('QOO_TEN_URL')
@@ -218,7 +219,7 @@ class LipSearch:
         """
 
         try:
-            lipTagInfo = []
+            productInfo = []
             cs = colorUtil.ColorService()
             similarValue = cs.searchSimilarValue(body.colorCode)
             similarSaturation = cs.searchSimilarSaturation(body.colorCode)
@@ -244,6 +245,7 @@ class LipSearch:
                                         amount = re.get('AMOUNT'),
                                         limitedProductFlag = re.get('LIMITED_PRODUCT_FLAG'),
                                         salesStopFlag = re.get('SALES_STOP_FLAG'),
+                                        prFlag = re.get('PR_FLAG'),
                                         officialURL = re.get('OFFICIAL_URL'),
                                         amazonURL = re.get('AMAZON_URL'),
                                         qooTenURL = re.get('QOO_TEN_URL')
@@ -251,8 +253,7 @@ class LipSearch:
                                 )
 
                     tagInfo = []
-                    tagResult = dao.lipTagSelect(re.get('LIP_ID'))
-                    current_app.logger.error(tagResult)
+                    tagResult = dao.lipTagSelect(lipInfo.lipInfo.lipId)
                     for tagRe in tagResult:
                         current_app.logger.error(tagRe)
                         tagInfo.append(responseBean.BaseTagInfo(
@@ -264,13 +265,25 @@ class LipSearch:
                         tagList = tagInfo
                         )
 
-                    lipTagInfo.append(responseBean.SimilarLipWithTagInfo(
+                    imageInfo = []
+                    imageResult = dao.productImageSelect(lipInfo.lipInfo.lipId)
+                    for imgRe in imageResult:
+                        current_app.logger.error(imgRe)
+                        imageInfo.append(responseBean.BaseTagInfo(
+                                        path = f"{set.IMAGE_PATH}{imgRe.get('BRAND_NAME')}/product/{imgRe.get('PATH')}"
+                                    ))
+                    imageList = responseBean.ImageInfoList(
+                        imageList = imageInfo
+                        )
+
+                    productInfo.append(responseBean.productInfo(
+                        imageList = imageList,
                         lipInfo = lipInfo,
                         tagList = tagInfoList
                     ))
 
-            response = responseBean.SimilarLipWithTagInfoList(
-                lipTagInfoList = lipTagInfo
+            response = responseBean.productInfoList(
+                productInfoList = productInfo
             ).model_dump_json()
             current_app.logger.debug(response)
 

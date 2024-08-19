@@ -3,8 +3,7 @@ import math
 import colorsys as cs
 from flask import current_app
 import sys
-sys.path.append('C:\\Users\\takeg\\work\\ffoffa_LipAdviser_API\\')
-# sys.path.append('/home/c1343520/program/lipAdviser/')
+sys.path.append('/home/c8473744/program/lipAdviser/')
 from Utils import settings as set
 
 class ConvertColor:
