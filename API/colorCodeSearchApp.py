@@ -269,7 +269,7 @@ class LipSearch:
                     imageResult = dao.productImageSelect(lipInfo.lipInfo.lipId)
                     for imgRe in imageResult:
                         current_app.logger.error(imgRe)
-                        imageInfo.append(responseBean.BaseTagInfo(
+                        imageInfo.append(responseBean.BaseImageInfo(
                                         path = f"{set.IMAGE_PATH}{imgRe.get('BRAND_NAME')}/product/{imgRe.get('PATH')}"
                                     ))
                     imageList = responseBean.ImageInfoList(
