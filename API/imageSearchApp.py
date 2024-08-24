@@ -33,8 +33,9 @@ class TagSearch:
 
             for re in result:
                 imageInfo.append(responseBean.BaseImageInfo(
-                                path = f"{set.IMAGE_PATH}{re.get('BRAND_NAME')}/logo/{re.get('PATH')}"
-                            ))
+                    alt = re.get('BRAND_NAME'),
+                    path = f"{set.IMAGE_PATH}{re.get('BRAND_NAME')}/logo/{re.get('PATH')}"
+                ))
 
             response = responseBean.ImageInfoList(
                 imageList = imageInfo
@@ -70,8 +71,9 @@ class TagSearch:
 
             for re in result:
                 imageInfo.append(responseBean.BaseImageInfo(
-                                path = f"{set.IMAGE_PATH}{re.get('BRAND_NAME')}/product/{re.get('PATH')}"
-                            ))
+                    alt = re.get('BRAND_NAME'),
+                    path = f"{set.IMAGE_PATH}{re.get('BRAND_NAME')}/product/{re.get('PATH')}"
+                ))
 
             response = responseBean.ImageInfoList(
                 imageList = imageInfo

@@ -270,8 +270,9 @@ class LipSearch:
                     for imgRe in imageResult:
                         current_app.logger.error(imgRe)
                         imageInfo.append(responseBean.BaseImageInfo(
-                                        path = f"{set.IMAGE_PATH}{imgRe.get('BRAND_NAME')}/product/{imgRe.get('PATH')}"
-                                    ))
+                            alt = re.get('BRAND_NAME'),
+                            path = f"{set.IMAGE_PATH}{imgRe.get('BRAND_NAME')}/product/{imgRe.get('PATH')}"
+                        ))
                     imageList = responseBean.ImageInfoList(
                         imageList = imageInfo
                         )

@@ -57,6 +57,7 @@ class TagInfoList(BaseModel):
     tagList: list[BaseTagInfo]
 
 class BaseImageInfo(BaseModel):
+    alt: str
     path: str
 
 class ImageInfoList(BaseModel):
