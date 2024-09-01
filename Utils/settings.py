@@ -21,6 +21,10 @@ SEARCH_RANGE_VALUE = 3
 JUDGE_RANGE_VALUE = 9.0
 MAX_SIMILAR_POINT = 10.0
 
+# サクセスフラグ
+SUCCESS = "1"
+NOT_SUCCESS = "0"
+
 # @cosme URL
 COSME_URL_BASE = 'https://www.cosme.net/variations/{COSME_URL}/'
 

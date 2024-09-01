@@ -6,6 +6,10 @@ class ErrorInfo(BaseModel):
     errorId: Optional[dict]
     errorMessage: Optional[list[str]]
 
+class ExecResultInfo(ErrorInfo):
+    successFlag: str
+
+
 class LipColorInfo(BaseModel):
     lipId: int
     colorCode: str
