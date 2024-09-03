@@ -3,11 +3,10 @@ import hashlib
 import sys
 sys.path.append('/home/c8473744/program/lipAdviser/')
 from DB.dataBase import Dao
-from Utils import inputBean, responseBean
-from Utils import settings as set
+from Utils import inputBean
 
 class Auth:
-    def authLogin(body: inputBean.AuthInput):
+    def authLogin(auth: inputBean.AuthInput):
         """API認証
 
         認証確認
@@ -18,17 +17,12 @@ class Auth:
 
         try:
             dao = Dao()
-            result = dao.authKeySelect(body.accessId, body.accessKey)
-            current_app.logger.error(result)
-
-            response = result == hashlib.sha512(body.accessId + body.accessKey)
+            result = dao.authKeySelect(auth.accessId, auth.accessKey)
+            response = result.get('HASH_KEY') == hashlib.sha512(auth.accessId.encode('utf-8') + auth.accessKey.encode('utf-8')).hexdigest()
 
         except Exception as e:
             current_app.logger.error(F'エラー詳細：{e}')
-            result = responseBean.ErrorInfo(
-                errorId = set.MESID_SYSTEM_ERROR,
-                errorMessage = ["API認証"]
-            )
+            response = False
 
         return response
 

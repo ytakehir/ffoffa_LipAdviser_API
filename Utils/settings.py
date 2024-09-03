@@ -1,3 +1,6 @@
+# 許可するオリジンのリスト
+ALLOWED_ORIGINS = ["http://localhost:3000", "https://ffoffa.com"]
+
 # SSH接続情報
 SSH_HOST = 'www86.conoha.ne.jp'
 SSH_PORT = 8022,

@@ -36,7 +36,7 @@ class Dao:
 
             # 結果を取得
             cur.execute(sql.SELECT_AUTH, {"accessId": accessId, "accessKey": accessKey})
-            result = cur.fetchall()
+            result = cur.fetchone()
         except Exception as e:
             # 結果を取得
             result = {"Error": e}

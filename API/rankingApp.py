@@ -27,7 +27,6 @@ class Ranking:
         try:
             dao = Dao()
             result = dao.LipHistoryInsert(body.lipId)
-            current_app.logger.error(result)
             response = responseBean.ExecResultInfo(
                 successFlag = result,
                 errorId = None,
