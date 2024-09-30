@@ -12,40 +12,42 @@ from Utils import settings as set
 app = Blueprint('tag', __name__)
 
 class TagSearch:
-    @app.route("/search/tags",  methods=["GET"])
-    @cross_origin(supports_credentials=True)
-    @validate()
-    def getBrandName():
-        """タグ一覧取得API
+  @app.route("/tags",  methods=["GET"])
+  @cross_origin(supports_credentials=True)
+  @validate()
+  def tags():
+    """タグ一覧取得API
 
-        タグを重複なしで取得する
+    タグを重複なしで取得する
 
-        Returns:
-            json: 取得結果
-        """
+    Returns:
+        json: 取得結果
+    """
 
-        try:
-            tagInfo = []
+    try:
+      tagList = []
 
-            dao = Dao()
-            result = dao.tagSelect()
+      dao = Dao()
+      result = dao.tagSelect()
 
-            for re in result:
-                tagInfo.append(responseBean.BaseTagInfo(
-                                tagId = re.get('ID'),
-                                tagName = re.get('TAG_NAME'),
-                                tagGenre = re.get('TAG_GENRE'),
-                            ))
+      for re in result:
+        tagList.append(responseBean.BaseTag(
+          tagId = re.get('ID'),
+          tagName = re.get('TAG_NAME'),
+          tagGenre = re.get('TAG_GENRE'),
+        ))
 
-            response = responseBean.TagInfoList(
-                tagList = tagInfo
-            ).model_dump_json()
+      response = responseBean.TagList(
+        tagList = tagList
+      ).model_dump_json()
 
-        except Exception as e:
-            current_app.logger.error(F'エラー詳細：{e}')
-            response = responseBean.ErrorInfo(
-                errorId = set.MESID_SYSTEM_ERROR,
-                errorMessage = ["タグ一覧取得API"]
-            )
+    except Exception as e:
+      current_app.logger.error(F'エラー詳細：{e}')
+      response = responseBean.Error(
+        errorId = set.MESID_SYSTEM_ERROR,
+        errorMessage = ["タグ一覧取得API"]
+      ).model_dump_json()
+      return jsonify(response), 400
 
-        return response
+    return jsonify(response), 200
+
