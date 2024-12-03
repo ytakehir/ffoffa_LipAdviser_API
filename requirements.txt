@@ -1,0 +1,7 @@
+flask
+typing
+pydantic
+flask_pydantic
+flask_cors
+pymysql
+requests
