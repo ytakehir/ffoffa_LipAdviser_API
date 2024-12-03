@@ -10,7 +10,7 @@ class DBAccess:
   def dbAccess():
     """DBの接続
     Returns:
-        Obj: DB接続情報
+      Obj: DB接続情報
     """
     conn = pymysql.connect(
       host = set.LIP_ADVISER_DB_HOST,
@@ -26,7 +26,7 @@ class Dao:
   def authKeySelect(self, accessId, accessKey):
     """SELECT
     Returns:
-        Obj: DB接続情報
+      Obj: DB接続情報
     """
 
     try:
@@ -48,7 +48,7 @@ class Dao:
   def brandNameSelect(self):
     """SELECT
     Returns:
-        Obj: DB接続情報
+      Obj: DB接続情報
     """
 
     try:
@@ -70,7 +70,7 @@ class Dao:
   def lipIdSelect(self, lipId):
     """SELECT
     Returns:
-        Obj: DB接続情報
+      Obj: DB接続情報
     """
 
     try:
@@ -79,7 +79,7 @@ class Dao:
 
       # 結果を取得
       cur.execute(sql.SELECT_WHERE_LIP_ID, {"lipId": lipId})
-      result = cur.fetchall()
+      result = cur.fetchone()
     except Exception as e:
       # 結果を取得
       result = {"Error": e}
@@ -92,7 +92,7 @@ class Dao:
   def productIdSelect(self, productId):
     """SELECT
     Returns:
-        Obj: DB接続情報
+      Obj: DB接続情報
     """
 
     try:
@@ -114,7 +114,7 @@ class Dao:
   def brandsLipSelect(self, brandName):
     """SELECT
     Returns:
-        Obj: DB接続情報
+      Obj: DB接続情報
     """
 
     try:
@@ -136,7 +136,7 @@ class Dao:
   def similarSelect(self, similarValue, similarSaturation):
     """SELECT
     Returns:
-        Obj: DB接続情報
+      Obj: DB接続情報
     """
 
     try:
@@ -158,7 +158,7 @@ class Dao:
   def lipTagSelect(self, lipId):
     """SELECT
     Returns:
-        Obj: DB接続情報
+      Obj: DB接続情報
     """
 
     try:
@@ -180,7 +180,7 @@ class Dao:
   def tagSelect(self):
     """SELECT
     Returns:
-        Obj: DB接続情報
+      Obj: DB接続情報
     """
 
     try:
@@ -202,7 +202,7 @@ class Dao:
   def logoImageSelect(self):
     """SELECT
     Returns:
-        Obj: DB接続情報
+      Obj: DB接続情報
     """
 
     try:
@@ -224,7 +224,7 @@ class Dao:
   def productImageSelect(self, lipId):
     """SELECT
     Returns:
-        Obj: DB接続情報
+      Obj: DB接続情報
     """
 
     try:
@@ -246,7 +246,7 @@ class Dao:
   def lipHistoryInsert(self, lipId):
     """SELECT
     Returns:
-        Obj: DB接続情報
+      Obj: DB接続情報
     """
 
     try:
@@ -269,7 +269,7 @@ class Dao:
   def colorCodeHistoryInsert(self, colorCode):
     """SELECT
     Returns:
-        Obj: DB接続情報
+      Obj: DB接続情報
     """
 
     try:
@@ -283,6 +283,50 @@ class Dao:
       result = set.SUCCESS
     except Exception as e:
       result = set.NOT_SUCCESS
+    finally:
+      cur.close()
+      conn.close()
+
+    return result
+
+  def productSelect(self):
+    """SELECT
+    Returns:
+      Obj: DB接続情報
+    """
+
+    try:
+      conn = DBAccess.dbAccess()
+      cur = conn.cursor()
+
+      # 結果を取得
+      cur.execute(sql.SELECT_DISTINCT_PRODUCT_ID)
+      result = cur.fetchall()
+    except Exception as e:
+      # 結果を取得
+      result = {"Error": e}
+    finally:
+      cur.close()
+      conn.close()
+
+    return result
+
+  def lipRankingSelect(self, interval):
+    """SELECT
+    Returns:
+      Obj: DB接続情報
+    """
+
+    try:
+      conn = DBAccess.dbAccess()
+      cur = conn.cursor()
+
+      # 結果を取得
+      cur.execute(sql.SELECT_RANKING_LIP, {"interval": interval})
+      result = cur.fetchall()
+    except Exception as e:
+      # 結果を取得
+      result = {"Error": e}
     finally:
       cur.close()
       conn.close()

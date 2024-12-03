@@ -77,3 +77,17 @@ class ProductList(BaseModel):
 
 class ImageList(BaseModel):
   imageList: list[BaseImage]
+
+class ProductId(BaseModel):
+  productId: str
+
+
+class ProductIdList(BaseModel):
+  productIdList: list[ProductId]
+
+class LipRanking(BaseModel):
+  lipId: int
+  count: int
+
+class LipRankingList(BaseModel):
+  lipRankingList: list[LipRanking]

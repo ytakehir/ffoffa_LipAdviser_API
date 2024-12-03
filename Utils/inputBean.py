@@ -14,7 +14,10 @@ class LipIdInput(BaseModel):
   lipId: int
 
 class ProductIdInput(BaseModel):
-  productId: str = Field(min_length = 2, pattern = r"p[0-9]+")
+  productId: str = Field(min_length = 2, pattern = r"FFP[0-9]+")
 
 class ImagePathInput(BaseModel):
   imagePath: str
+
+class IntervalInput(BaseModel):
+  interval: int

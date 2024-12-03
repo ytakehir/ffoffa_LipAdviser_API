@@ -21,7 +21,7 @@ class TagSearch:
     ロゴ画像を重複なしで取得する
 
     Returns:
-        json: 取得結果
+      json: 取得結果
     """
 
     try:
@@ -59,7 +59,7 @@ class TagSearch:
     商品画像を取得する
 
     Returns:
-        json: 取得結果
+      json: 取得結果
     """
 
     try:

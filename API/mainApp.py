@@ -1,17 +1,24 @@
-from flask import Flask, jsonify, request, make_response
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import logging
 import sys
 sys.path.append('/home/c8473744/program/lipAdviser/')
-from API import colorCodeSearchApp, tagSearchApp, imageSearchApp, rankingApp, testApp, webhookApp, dbLocalAccess
+from API import colorCodeSearchApp, tagSearchApp, imageSearchApp, rankingApp, testApp, webhookApp
 from API.authApp import Auth
 from Utils import settings as set
 from Utils import inputBean
 
 app = Flask(__name__)
 app.json.ensure_ascii = False
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": ["http://localhost:3000", "https://ffoffa.com"]}})
+CORS(app, origins=["http://localhost:3000/", "https://ffoffa.com/"], supports_credentials=True)
 logging.basicConfig(level=logging.ERROR)
+
+CORS(testApp.app, supports_credentials=True)
+CORS(colorCodeSearchApp.app, supports_credentials=True)
+CORS(tagSearchApp.app, supports_credentials=True)
+CORS(imageSearchApp.app, supports_credentials=True)
+CORS(rankingApp.app, supports_credentials=True)
+CORS(webhookApp.app, supports_credentials=True)
 
 app.register_blueprint(testApp.app)
 app.register_blueprint(colorCodeSearchApp.app)
@@ -19,12 +26,22 @@ app.register_blueprint(tagSearchApp.app)
 app.register_blueprint(imageSearchApp.app)
 app.register_blueprint(rankingApp.app)
 app.register_blueprint(webhookApp.app)
-app.register_blueprint(dbLocalAccess.app)
+
+def build_cors_preflight_response():
+    response = jsonify({"status": "CORS Preflight OK"})
+    response.headers.add("Access-Control-Allow-Origin", "http://localhost:3000")
+    response.headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization, accessId, accessKey")
+    response.headers.add("Access-Control-Allow-Credentials", "true")
+    return response
 
 @app.before_request
-def check_authentication():
+def handle_options_request():
+  if request.method == "OPTIONS":
+    return build_cors_preflight_response()
+
   # /webhookへのアクセスはスルーする
-  if request.path == '/webhook':
+  if request.method == "OPTIONS" and request.path == '/webhook':
     return None
 
   if not (request.headers.get('accessId') and request.headers.get('accessKey')):
@@ -36,28 +53,6 @@ def check_authentication():
   )
   if not Auth.authLogin(auth):
     return jsonify({"errorId": set.MESID_AUTH_ERROR, "errorMessage":["API認証"]}), 403
-
-@app.route('/<path:path>', methods=['OPTIONS'])
-def handle_options(path):
-  origin = request.headers.get('Origin')
-  if origin in ['http://localhost:3000/', 'http://localhost:4173/', 'https://ffoffa.com/']:
-    response = make_response()
-    response.headers.add('Access-Control-Allow-Origin', origin)
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization, accessId, accessKey')
-    response.headers.add('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS')
-    response.headers.add('Access-Control-Allow-Credentials', 'true')
-    return response, 200
-  return jsonify({"error": "Origin not allowed"}), 403
-
-@app.after_request
-def after_request(response):
-  origin = request.headers.get('Origin')
-  if origin in ['http://localhost:3000/', 'http://localhost:4173/', 'https://ffoffa.com/']:
-    response.headers.add('Access-Control-Allow-Origin', origin)
-  response.headers.add('Access-Control-Allow-Credentials', 'true')
-  response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization, accessId, accessKey')
-  response.headers.add('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS')
-  return response
 
 if __name__ == '__main__':
   app.run(debug=True)
