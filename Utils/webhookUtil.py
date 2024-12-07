@@ -1,7 +1,7 @@
 import requests
 from flask import current_app
-from ..Utils import apiRequest
-from ..Utils import settings as set
+from Utils import apiRequest
+from Utils import settings as set
 
 class WebhookService:
   def replyMessage(self, senderId, messaging):

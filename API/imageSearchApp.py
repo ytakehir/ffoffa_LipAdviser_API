@@ -2,9 +2,9 @@ from flask import Blueprint, jsonify
 from flask_pydantic import validate
 from flask import current_app
 from flask_cors import cross_origin
-from ..DB.dataBase import Dao
-from ..Utils import inputBean, responseBean
-from ..Utils import settings as set
+from DB.dataBase import Dao
+from Utils import inputBean, responseBean
+from Utils import settings as set
 
 app = Blueprint('image', __name__)
 

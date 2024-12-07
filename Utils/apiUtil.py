@@ -1,5 +1,5 @@
-from ..Utils import responseBean
-from ..Utils import settings as set
+from Utils import responseBean
+from Utils import settings as set
 
 class ApiService:
   def createImage(self, result, imageResult):

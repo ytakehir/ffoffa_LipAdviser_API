@@ -1,7 +1,7 @@
 from flask import jsonify
 import pymysql.cursors
-from ..Utils import sql
-from ..Utils import settings as set
+from Utils import sql
+from Utils import settings as set
 
 class DBAccess:
   def dbAccess():

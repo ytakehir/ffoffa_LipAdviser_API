@@ -1,7 +1,7 @@
 from flask import current_app
 import hashlib
-from ..DB.dataBase import Dao
-from ..Utils import inputBean
+from DB.dataBase import Dao
+from Utils import inputBean
 
 class Auth:
   def authLogin(auth: inputBean.AuthInput):

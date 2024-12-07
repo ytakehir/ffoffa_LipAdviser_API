@@ -1,7 +1,7 @@
 from cmath import sqrt
 import math
 import colorsys as cs
-from ..Utils import settings as set
+from Utils import settings as set
 
 class ConvertColor:
   def hexToRgb(self, hexCode):

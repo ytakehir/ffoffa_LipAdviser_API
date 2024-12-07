@@ -3,8 +3,8 @@ from flask_cors import CORS
 import logging
 from . import colorCodeSearchApp, tagSearchApp, imageSearchApp, rankingApp, testApp, webhookApp
 from .authApp import Auth
-from ..Utils import settings as set
-from ..Utils import inputBean
+from Utils import settings as set
+from Utils import inputBean
 
 app = Flask(__name__)
 app.json.ensure_ascii = False
