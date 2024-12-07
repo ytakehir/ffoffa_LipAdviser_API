@@ -1,9 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask import current_app
-import sys
-sys.path.append('/home/c8473744/program/lipAdviser/')
-from Utils import webhookUtil as wh
-from Utils import settings as set
+from ..Utils import webhookUtil as wh
+from ..Utils import settings as set
 
 app = Blueprint('webhook', __name__)
 

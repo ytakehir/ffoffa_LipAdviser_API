@@ -1,12 +1,10 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import logging
-import sys
-sys.path.append('/home/c8473744/program/lipAdviser/')
-from API import colorCodeSearchApp, tagSearchApp, imageSearchApp, rankingApp, testApp, webhookApp
-from API.authApp import Auth
-from Utils import settings as set
-from Utils import inputBean
+from . import colorCodeSearchApp, tagSearchApp, imageSearchApp, rankingApp, testApp, webhookApp
+from .authApp import Auth
+from ..Utils import settings as set
+from ..Utils import inputBean
 
 app = Flask(__name__)
 app.json.ensure_ascii = False

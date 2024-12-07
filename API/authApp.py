@@ -1,9 +1,7 @@
 from flask import current_app
 import hashlib
-import sys
-sys.path.append('/home/c8473744/program/lipAdviser/')
-from DB.dataBase import Dao
-from Utils import inputBean
+from ..DB.dataBase import Dao
+from ..Utils import inputBean
 
 class Auth:
   def authLogin(auth: inputBean.AuthInput):

@@ -1,7 +1,5 @@
-import sys
-sys.path.append('/home/c8473744/program/lipAdviser/')
-from Utils import responseBean
-from Utils import settings as set
+from ..Utils import responseBean
+from ..Utils import settings as set
 
 class ApiService:
   def createImage(self, result, imageResult):

@@ -1,10 +1,7 @@
 from cmath import sqrt
 import math
 import colorsys as cs
-from flask import current_app
-import sys
-sys.path.append('/home/c8473744/program/lipAdviser/')
-from Utils import settings as set
+from ..Utils import settings as set
 
 class ConvertColor:
   def hexToRgb(self, hexCode):

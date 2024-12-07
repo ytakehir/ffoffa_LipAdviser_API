@@ -1,13 +1,10 @@
 from flask import Blueprint, jsonify
-from pydantic import ValidationError
 from flask_pydantic import validate
 from flask import current_app
 from flask_cors import cross_origin
-import sys
-sys.path.append('/home/c8473744/program/lipAdviser/')
-from DB.dataBase import Dao
-from Utils import inputBean, responseBean
-from Utils import settings as set
+from ..DB.dataBase import Dao
+from ..Utils import responseBean
+from ..Utils import settings as set
 
 app = Blueprint('tag', __name__)
 
@@ -21,7 +18,7 @@ class TagSearch:
     タグを重複なしで取得する
 
     Returns:
-        json: 取得結果
+      json: 取得結果
     """
 
     try:

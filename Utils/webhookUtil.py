@@ -1,10 +1,7 @@
 import requests
-import re
 from flask import current_app
-import sys
-sys.path.append('/home/c8473744/program/lipAdviser/')
-from Utils import apiRequest
-from Utils import settings as set
+from ..Utils import apiRequest
+from ..Utils import settings as set
 
 class WebhookService:
   def replyMessage(self, senderId, messaging):

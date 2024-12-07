@@ -1,13 +1,10 @@
 from flask import Blueprint, jsonify
-from pydantic import ValidationError
 from flask_pydantic import validate
 from flask import current_app
 from flask_cors import cross_origin
-import sys
-sys.path.append('/home/c8473744/program/lipAdviser/')
-from DB.dataBase import Dao
-from Utils import inputBean, responseBean
-from Utils import settings as set
+from ..DB.dataBase import Dao
+from ..Utils import inputBean, responseBean
+from ..Utils import settings as set
 
 app = Blueprint('ranking', __name__)
 
@@ -20,8 +17,11 @@ class Ranking:
 
     検索回数と履歴を登録する
 
+    Args:
+      lipId (int): リップID
+
     Returns:
-        json: 実行可否
+      json: 実行可否
     """
 
     try:
@@ -52,8 +52,11 @@ class Ranking:
 
     検索回数の上位10個取得する
 
+    Args:
+      interval (int): 検索期間
+
     Returns:
-        json: 実行可否
+      json: 実行可否
     """
 
     try:
@@ -90,8 +93,11 @@ class Ranking:
 
     検索回数と履歴を登録する
 
+    Args:
+      colorCode (str(16進数)): カラーコード
+
     Returns:
-        json: 実行可否
+      json: 実行可否
     """
 
     try:

@@ -1,10 +1,7 @@
 from flask import jsonify
 import pymysql.cursors
-from flask import current_app
-import sys
-sys.path.append('/home/c8473744/program/lipAdviser/')
-from Utils import sql, responseBean
-from Utils import settings as set
+from ..Utils import sql
+from ..Utils import settings as set
 
 class DBAccess:
   def dbAccess():

@@ -2,11 +2,9 @@ from flask import Blueprint, jsonify
 from flask_pydantic import validate
 from flask import current_app
 from flask_cors import cross_origin
-import sys
-sys.path.append('/home/c8473744/program/lipAdviser/')
-from DB.dataBase import Dao
-from Utils import apiUtil, colorUtil, inputBean, responseBean
-from Utils import settings as set
+from ..DB.dataBase import Dao
+from ..Utils import apiUtil, colorUtil, inputBean, responseBean
+from ..Utils import settings as set
 
 app = Blueprint('lipAdviser', __name__)
 
