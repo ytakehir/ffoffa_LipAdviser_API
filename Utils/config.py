@@ -1,0 +1,23 @@
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+
+# LipAdviser DB接続情報
+LIP_ADVISER_DB_NAME = os.getenv('LIP_ADVISER_DB_NAME')
+LIP_ADVISER_DB_HOST = os.getenv('LIP_ADVISER_DB_HOST')
+LIP_ADVISER_DB_PORT = os.getenv('LIP_ADVISER_DB_PORT')
+LIP_ADVISER_DB_USER = os.getenv('LIP_ADVISER_DB_USER')
+LIP_ADVISER_DB_PASS = os.getenv('LIP_ADVISER_DB_PASS')
+LIP_ADVISER_DB_CHARSET = os.getenv('LIP_ADVISER_DB_CHARSET')
+
+# ffoffaAPI接続情報
+FFOFFA_URL = os.getenv('FFOFFA_URL')
+FFOFFA_LIP_ADVISER_URL = os.getenv('FFOFFA_LIP_ADVISER_URL')
+API_ACCESS_ID = os.getenv('API_ACCESS_ID')
+API_ACCESS_KEY = os.getenv('API_ACCESS_KEY')
+
+# webhook接続情報
+WEBHOOK_VERIFY_TOKEN = os.getenv('WEBHOOK_VERIFY_TOKEN')
+WEBHOOK_ACCESS_TOKEN = os.getenv('WEBHOOK_ACCESS_TOKEN')
+WEBHOOK_PAGE_ID = os.getenv('WEBHOOK_PAGE_ID')

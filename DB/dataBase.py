@@ -1,5 +1,6 @@
-from flask import jsonify
+from flask import jsonify, current_app
 import pymysql.cursors
+from Utils import config
 from Utils import sql
 from Utils import settings as set
 
@@ -9,13 +10,23 @@ class DBAccess:
     Returns:
       Obj: DB接続情報
     """
-    conn = pymysql.connect(
-      host = set.LIP_ADVISER_DB_HOST,
-      db = set.LIP_ADVISER_DB_NAME,
-      user = set.LIP_ADVISER_DB_USER,
-      password = set.LIP_ADVISER_DB_PASS,
-      cursorclass = pymysql.cursors.DictCursor
-    )
+
+    pymysql.install_as_MySQLdb()
+    pymysql.DEBUG = True
+
+    try:
+      conn = pymysql.connect(
+        host = config.LIP_ADVISER_DB_HOST,
+        db = config.LIP_ADVISER_DB_NAME,
+        user = config.LIP_ADVISER_DB_USER,
+        password = config.LIP_ADVISER_DB_PASS,
+        cursorclass = pymysql.cursors.DictCursor
+      )
+    except Exception as e:
+      # 結果を取得
+      current_app.logger.error(repr(e))
+
+      return {"Error": repr(e)}
 
     return conn
 

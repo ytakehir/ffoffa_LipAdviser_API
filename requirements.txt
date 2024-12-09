@@ -1,7 +1,9 @@
+python-dotenv
 flask
 typing
 pydantic
 flask_pydantic
 flask_cors
 pymysql
+cryptography
 requests
