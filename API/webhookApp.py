@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask import current_app
 from Utils import webhookUtil as wh
-from Utils import settings as set
+from Utils import config
 
 app = Blueprint('webhook', __name__)
 
@@ -13,7 +13,7 @@ class Webhook:
     challenge = request.args.get('hub.challenge')
 
     if mode and token:
-      if mode == 'subscribe' and token == set.WEBHOOK_VERIFY_TOKEN:
+      if mode == 'subscribe' and token == config.WEBHOOK_VERIFY_TOKEN:
         print("WEBHOOK_VERIFIED")
         return challenge, 200
       else:
@@ -22,7 +22,6 @@ class Webhook:
   @app.route('/webhook', methods=['POST'])
   def handleWebhook():
     data = request.get_json()
-    current_app.logger.error(data)
 
     if data and 'entry' in data:
       entry = data['entry'][0]

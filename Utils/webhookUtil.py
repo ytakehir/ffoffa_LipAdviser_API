@@ -1,6 +1,7 @@
 import requests
 from flask import current_app
 from Utils import apiRequest
+from Utils import config
 from Utils import settings as set
 
 class WebhookService:
@@ -72,12 +73,12 @@ class WebhookService:
       "title": f"似ているリップをもっと見る",
       "default_action": {
           "type": "web_url",
-          "url": f'{set.FFOFFA_URL}result/{colorCode}',
+          "url": f'{config.FFOFFA_URL}result/{colorCode}',
       },
       "buttons": [
         {
             "type": "web_url",
-            "url": f'{set.FFOFFA_URL}result/{colorCode}',
+            "url": f'{config.FFOFFA_URL}result/{colorCode}',
             "title": "もっと見る"
         }
       ]
@@ -117,16 +118,16 @@ class SendMessage:
     ar = apiRequest.ApiRequest()
     headers = {
       "Content-Type": "application/json; charset=UTF-8",
-      "accessId": set.API_ACCESS_ID,
-      "accessKey": set.API_ACCESS_KEY
+      "accessId": config.API_ACCESS_ID,
+      "accessKey": config.API_ACCESS_KEY
     }
 
     body = {
       "colorCode": colorCode
     }
 
-    response = ar.post(f'{set.FFOFFA_LIP_ADVISER_URL}similarLip', headers, body)
-    ar.post(f'{set.FFOFFA_LIP_ADVISER_URL}colorCodeHistory', headers, body)
+    response = ar.post(f'{config.FFOFFA_LIP_ADVISER_URL}similarLip', headers, body)
+    ar.post(f'{config.FFOFFA_LIP_ADVISER_URL}colorCodeHistory', headers, body)
 
     if response != None:
       ws = WebhookService()
@@ -142,7 +143,7 @@ class SendMessage:
     data = ws.replyMessage(senderId, message)
 
     # POSTリクエストでメッセージを送信
-    url = f"{set.INSTAGRAM_API_PATH}me/messages?access_token={set.WEBHOOK_ACCESS_TOKEN}"
+    url = f"{set.INSTAGRAM_API_PATH}me/messages?access_token={config.WEBHOOK_ACCESS_TOKEN}"
     response = requests.post(url, json=data)
 
     if response.status_code == 200:

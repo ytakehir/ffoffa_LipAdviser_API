@@ -10,6 +10,7 @@ app = Blueprint('lipAdviser', __name__)
 
 class LipSearch:
   @app.route("/brandName",  methods=["GET"])
+  @cross_origin(supports_credentials=True)
   @validate()
   def brandName():
     """ブランド名一覧取得API
