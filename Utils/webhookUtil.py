@@ -1,5 +1,6 @@
 import requests
 from flask import current_app
+from Utils import config
 from Utils import apiRequest
 from Utils import config
 from Utils import settings as set

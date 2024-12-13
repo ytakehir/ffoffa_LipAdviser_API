@@ -22,9 +22,11 @@ app.register_blueprint(webhookApp.app)
 def handle_options_request():
   # /webhookへのアクセスはスルーする
   if request.method == "OPTIONS" or request.path == '/webhook' or request.path == '/test':
+  if request.method == "OPTIONS" or request.path == '/webhook' or request.path == '/test':
     return None
 
   if not (request.headers.get('accessId') and request.headers.get('accessKey')):
+    return jsonify({"errorId": set.MESID_AUTH_ERROR, "errorMessage":["API認証1"]}), 403
     return jsonify({"errorId": set.MESID_AUTH_ERROR, "errorMessage":["API認証1"]}), 403
 
   auth = inputBean.AuthInput(
@@ -32,8 +34,11 @@ def handle_options_request():
     accessKey=request.headers.get('accessKey')
   )
 
+
   if not Auth.authLogin(auth):
+    return jsonify({"errorId": set.MESID_AUTH_ERROR, "errorMessage":["API認証2"]}), 403
     return jsonify({"errorId": set.MESID_AUTH_ERROR, "errorMessage":["API認証2"]}), 403
 
 if __name__ == '__main__':
+  app.run(host='0.0.0.0', port=5000, debug=True)
   app.run(host='0.0.0.0', port=5000, debug=True)

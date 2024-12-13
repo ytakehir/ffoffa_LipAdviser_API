@@ -5,4 +5,5 @@ pydantic
 flask_pydantic
 flask_cors
 pymysql
+cryptography
 requests
