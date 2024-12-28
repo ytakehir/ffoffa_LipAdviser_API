@@ -1,11 +1,11 @@
 # 許可するオリジンのリスト
-ALLOWED_ORIGINS = ["http://localhost:10000","http://localhost:3000/", "https://ffoffa.com/"]
+ALLOWED_ORIGINS = ["http://localhost","http://localhost:3000/", "https://ffoffa.com/", "https://ffoffa.net/"]
 
 # InstagramAPIパス
 INSTAGRAM_API_PATH = 'https://graph.facebook.com/v20.0/'
 
 # デフォルト画像パス
-IMAGE_PATH = 'https://ffoffa.com/image/'
+IMAGE_PATH = 'https://ffoffa.net/image/'
 
 # colorService設定値
 SEARCH_RANGE_VALUE = 3
