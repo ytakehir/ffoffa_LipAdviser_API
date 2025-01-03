@@ -1,7 +1,6 @@
 from flask import jsonify, current_app
 import pymysql.cursors
 from Utils import config
-from Utils import config
 from Utils import sql
 from Utils import settings as set
 
