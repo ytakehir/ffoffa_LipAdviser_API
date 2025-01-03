@@ -7,7 +7,7 @@ ALLOWED_ORIGINS = ["http://localhost","http://localhost:3000/", "https://ffoffa.
 INSTAGRAM_API_PATH = 'https://graph.facebook.com/v20.0/'
 
 # デフォルト画像パス
-IMAGE_PATH = 'https://image.ffoffa.net/image/'
+IMAGE_PATH = 'https://image.ffoffa.net/'
 
 # colorService設定値
 SEARCH_RANGE_VALUE = 3
