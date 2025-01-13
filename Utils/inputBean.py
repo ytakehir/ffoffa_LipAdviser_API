@@ -21,3 +21,6 @@ class ImagePathInput(BaseModel):
 
 class IntervalInput(BaseModel):
   interval: int
+
+class Base64Input(BaseModel):
+  base64: str

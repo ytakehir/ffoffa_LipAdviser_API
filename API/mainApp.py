@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, make_response
 from flask_cors import CORS
 import logging
-from . import colorCodeSearchApp, tagSearchApp, imageSearchApp, rankingApp, testApp, webhookApp
+from . import colorCodeSearchApp, tagSearchApp, imageSearchApp, rankingApp, testApp, webhookApp, colorAIApp
 from .authApp import Auth
 from Utils import settings as set
 from Utils import inputBean
@@ -10,6 +10,7 @@ app = Flask(__name__)
 CORS(app, origins=[set.ALLOWED_ORIGINS], methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"], allow_headers=["Content-Type", "Authorization", "accessId", "accessKey"], supports_credentials=True)
 app.json.ensure_ascii = False
 logging.basicConfig(level=logging.DEBUG)
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 app.register_blueprint(testApp.app)
 app.register_blueprint(colorCodeSearchApp.app)
@@ -17,6 +18,7 @@ app.register_blueprint(tagSearchApp.app)
 app.register_blueprint(imageSearchApp.app)
 app.register_blueprint(rankingApp.app)
 app.register_blueprint(webhookApp.app)
+app.register_blueprint(colorAIApp.app)
 
 @app.before_request
 def handle_options_request():
@@ -32,9 +34,8 @@ def handle_options_request():
     accessKey=request.headers.get('accessKey')
   )
 
-
   if not Auth.authLogin(auth):
     return jsonify({"errorId": set.MESID_AUTH_ERROR, "errorMessage":["API認証2"]}), 403
 
 if __name__ == '__main__':
-  app.run(host='0.0.0.0', debug=True)
+  app.run(host='0.0.0.0')

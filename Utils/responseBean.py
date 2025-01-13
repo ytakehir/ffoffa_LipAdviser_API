@@ -91,3 +91,7 @@ class LipRanking(BaseModel):
 
 class LipRankingList(BaseModel):
   lipRankingList: list[LipRanking]
+
+class colorAI(BaseModel):
+  colorCode: str
+  base64: str
